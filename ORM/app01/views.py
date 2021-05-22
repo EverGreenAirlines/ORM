@@ -5,15 +5,19 @@ from app01.models import Book
 
 def index(request):
     # =====================================添加记录=============================================================
-    # 方式一：
-    # book_obj=Book(id=1, title="python宝典",state=True,price=100,pub_date="2020-12-21",publisher='人民出版社')
-    # book_obj.save()
-    # book_obj=Book(title="吸星大法", state=True,price=200,  pub_date="2018-12-12",publisher="明教出版社")
-    # book_obj.save()
-    # # 方式二：
-    # book_obj=Book.objects.create(title="python入门",state=True,price=150,pub_date="2010-02-21",publisher="福建出版社")
-    # book_obj=Book.objects.create(title="独孤九剑", state=True,price=150,  pub_date="2019-01-12",publisher="华山出版社")
+    # #方式一：
+    book_obj=Book(id=1, title="python宝典",state=True,price=100,pub_date="2020-12-21",publisher='人民出版社')
+    book_obj.save()
+    book_obj=Book(title="吸星大法", state=True,price=200,  pub_date="2018-12-12",publisher="明教出版社")
+    book_obj.save()
+    book_obj=Book(title="Python精华", state=True,price=230,  pub_date="2021-12-22",publisher="道教出版社")
+    book_obj.save()
 
+    # 方式二：
+    book_obj=Book.objects.create(title="python入门",state=True,price=150,pub_date="2020-02-21",publisher="福建出版社")
+    book_obj=Book.objects.create(title="独孤九剑", state=True,price=250,  pub_date="2018-03-12",publisher="华山出版社")
+    book_obj=Book.objects.create(title="VBA指南", state=True,price=380,  pub_date="2021-11-18",publisher="泰山出版社")
+    book_obj=Book.objects.create(title="Python指南", state=True,price=150,  pub_date="2019-01-12",publisher="衡山出版社")
 
     # =====================================查询记录API=============================================================
     '''
@@ -97,6 +101,17 @@ def index(request):
     print('书名指定py开头查询结果集：', book_list)
     book_list=Book.objects.filter(pub_date__year=2020)
     print('出版年份指定2020查询结果集：', book_list,book_list.first().publisher)
+
+    # =====================================删除和修改记录API=============================================================
+    bookset=Book.objects.filter(title__icontains='py').delete()
+    print(bookset)
+
+    bookset = Book.objects.filter(price=200).update(price=250)
+    print(bookset)
+
+    bookset = Book.objects.all().update(title='毛泽东文选')
+    print(bookset)
+
 
 
     return HttpResponse('OK')
