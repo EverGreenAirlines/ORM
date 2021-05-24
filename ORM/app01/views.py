@@ -16,8 +16,19 @@ def index(request):
     # 方式二：
     book_obj=Book.objects.create(title="python入门",state=True,price=150,pub_date="2020-02-21",publisher="福建出版社")
     book_obj=Book.objects.create(title="独孤九剑", state=True,price=250,  pub_date="2018-03-12",publisher="华山出版社")
-    book_obj=Book.objects.create(title="VBA指南", state=True,price=380,  pub_date="2021-11-18",publisher="泰山出版社")
+    book_obj=Book.objects.create(title="VBA应用", state=True,price=380,  pub_date="2021-11-18",publisher="泰山出版社")
     book_obj=Book.objects.create(title="Python指南", state=True,price=150,  pub_date="2019-01-12",publisher="衡山出版社")
+
+    book_obj = Book.objects.create(title='VBA指南', state=True, price=250, pub_date='2021-05-13', publisher='人民出版社')
+    book_obj = Book.objects.create(title='Java指南', state=True, price=200, pub_date='2020-07-23', publisher='民族出版社')
+    book_obj = Book.objects.create(title='C+指南', state=True, price=230, pub_date='2019-07-23', publisher='强国出版社')
+    book_obj = Book.objects.create(title='Go指南', state=True, price=200, pub_date='2021-07-23', publisher='复兴出版社')
+    # 方式二：
+    book_obj = Book(title='python初阶', state=True, price=150, pub_date='2020-10-13', publisher='福建出版社')
+    book_obj.save()
+    book_obj = Book(title='Python提升', state=True, price=180, pub_date='2020-04-06', publisher='江苏出版社')
+    book_obj.save()
+    book_obj = Book(title='Python高阶', state=True, price=280, pub_date='2018-10-06', publisher='江西出版社')
 
     # =====================================查询记录API=============================================================
     '''
@@ -110,6 +121,9 @@ def index(request):
     print(bookset)
 
     bookset = Book.objects.all().update(title='毛泽东文选')
+    print(bookset)
+
+    bookset = Book.objects.all().values('title').distinct()
     print(bookset)
 
 
