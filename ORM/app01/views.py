@@ -120,11 +120,11 @@ def index(request):
     bookset = Book.objects.filter(price=200).update(price=250)
     print(bookset)
 
-    bookset = Book.objects.all().update(title='毛泽东文选')
-    print(bookset)
-
-    bookset = Book.objects.all().values('title').distinct()
-    print(bookset)
+    # bookset = Book.objects.all().update(title='毛泽东文选')
+    # print(bookset)
+    #
+    # bookset = Book.objects.all().values('title').distinct()
+    # print(bookset)
 
 
 
